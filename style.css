@@ -44,3 +44,24 @@ nav button {
   background: white;
   font-size: 24px;
 }
+
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:12px;
+    border:1px solid #ddd;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+#save-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:#ff4f8b;
+    color:white;
+    font-size:18px;
+    margin-top:10px;
+}
