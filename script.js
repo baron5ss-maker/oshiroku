@@ -1,55 +1,182 @@
-const homeScreen = document.getElementById("home-screen");
-const addScreen = document.getElementById("add-screen");
+// ==========================
+// 推し録 v1.0
+// ==========================
 
-const homeBtn = document.getElementById("home-btn");
-const addBtn = document.getElementById("add-btn");
+const screens = {
+    home: document.getElementById("home-screen"),
+    add: document.getElementById("add-screen"),
+    history: document.getElementById("history-screen"),
+    stats: document.getElementById("stats-screen")
+};
 
-homeBtn.addEventListener("click", () => {
-    homeScreen.style.display = "block";
-    addScreen.style.display = "none";
-});
+// タブ
+document.getElementById("home-btn").addEventListener("click", () => showScreen("home"));
+document.getElementById("add-btn").addEventListener("click", () => showScreen("add"));
 
-addBtn.addEventListener("click", () => {
-    homeScreen.style.display = "none";
-    addScreen.style.display = "block";
-});
+function showScreen(screen) {
 
-// 保存ボタン
-document.getElementById("save-btn").addEventListener("click", () => {
+    Object.values(screens).forEach(s => s.style.display = "none");
 
-    const eventName = document.getElementById("event-name").value;
-    const groupName = document.getElementById("group-name").value;
-    const memberName = document.getElementById("member-name").value;
+    screens[screen].style.display = "block";
 
-    if (!eventName || !groupName || !memberName) {
-        alert("全部入力してね😊");
-        return;
-    }
+}
 
-    const live = {
-        eventName,
-        groupName,
-        memberName,
-        createdAt: new Date().toISOString()
+// 初期表示
+showScreen("home");
+
+// ==========================
+// 保存
+// ==========================
+
+document
+.getElementById("save-btn")
+.addEventListener("click", saveLive);
+
+function saveLive(){
+
+    const live={
+
+        date:getValue("event-date"),
+
+        group:getValue("group-name"),
+
+        event:getValue("event-name"),
+
+        venue:getValue("venue-name"),
+
+        member:getValue("member-name"),
+
+        cheki:Number(
+            getValue("cheki-count-input") || 0
+        ),
+
+        setlist:getValue("setlist"),
+
+        memo:getValue("memo"),
+
+        createdAt:Date.now()
+
     };
 
-    // 今まで保存したデータ
-    const lives = JSON.parse(localStorage.getItem("lives") || "[]");
+    if(
+        !live.group ||
+        !live.event
+    ){
 
-    // 追加
+        alert("グループとイベント名は入力してね😊");
+        return;
+
+    }
+
+    const lives=loadLives();
+
     lives.push(live);
 
-    // 保存
-    localStorage.setItem("lives", JSON.stringify(lives));
+    saveLives(lives);
 
-    alert("保存したよ🎉");
+    clearForm();
 
-    // 入力欄クリア
-    document.getElementById("event-name").value = "";
-    document.getElementById("group-name").value = "";
-    document.getElementById("member-name").value = "";
+    updateHome();
 
-    // ホームへ戻る
-    homeBtn.click();
+    showScreen("home");
 
-});
+    alert("💖 思い出を追加しました！");
+
+}
+
+// ==========================
+// Home更新
+// ==========================
+
+function updateHome(){
+
+    const lives=loadLives();
+
+    document.getElementById("live-count").textContent=lives.length;
+
+    const totalCheki=lives.reduce(
+        (sum,live)=>sum+live.cheki,
+        0
+    );
+
+    document.getElementById("cheki-count").textContent=totalCheki;
+
+    const next=document.getElementById("next-live");
+
+    if(lives.length===0){
+
+        next.textContent="まだ登録されていません";
+
+        return;
+
+    }
+
+    const latest=lives[lives.length-1];
+
+    next.innerHTML=`
+
+        <strong>${latest.group}</strong><br>
+
+        ${latest.event}<br>
+
+        📍 ${latest.venue || "-"}
+
+    `;
+
+}
+
+// ==========================
+// LocalStorage
+// ==========================
+
+function loadLives(){
+
+    return JSON.parse(
+        localStorage.getItem("lives") || "[]"
+    );
+
+}
+
+function saveLives(data){
+
+    localStorage.setItem(
+        "lives",
+        JSON.stringify(data)
+    );
+
+}
+
+// ==========================
+// Utility
+// ==========================
+
+function getValue(id){
+
+    return document
+        .getElementById(id)
+        .value
+        .trim();
+
+}
+
+function clearForm(){
+
+    [
+        "event-date",
+        "group-name",
+        "event-name",
+        "venue-name",
+        "member-name",
+        "cheki-count-input",
+        "setlist",
+        "memo"
+    ].forEach(id=>{
+
+        document.getElementById(id).value="";
+
+    });
+
+}
+
+// 初回表示
+updateHome();
