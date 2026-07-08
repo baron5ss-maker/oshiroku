@@ -1,124 +1,277 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===========================
+   推し録 v1.0
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background: #f5f5f7;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "Helvetica Neue", sans-serif;
-    color: #1d1d1f;
-    padding-bottom: 90px;
+:root{
+
+    --main:#ff4f8b;
+    --main-light:#ff77b7;
+    --bg:#f5f5f7;
+    --text:#1d1d1f;
+    --sub:#6e6e73;
+    --card:#ffffff;
+
 }
 
-.app-header {
-    text-align: center;
-    padding: 40px 20px 20px;
+body{
+
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+
+    padding-bottom:100px;
+
 }
 
-.app-header h1 {
-    font-size: 34px;
-    margin-bottom: 8px;
+/* ===========================
+   Header
+=========================== */
+
+.app-header{
+
+    text-align:center;
+
+    padding:42px 20px 24px;
+
 }
 
-.app-header p {
-    color: #666;
+.app-header h1{
+
+    font-size:34px;
+    font-weight:700;
+
 }
 
-main {
-    padding: 20px;
+.app-header p{
+
+    margin-top:8px;
+
+    color:var(--sub);
+
 }
 
-.welcome-card {
-    background: linear-gradient(135deg,#ff77b7,#ff4f8b);
-    color: white;
-    border-radius: 24px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 12px 30px rgba(255,79,139,.25);
+/* ===========================
+   Main
+=========================== */
+
+main{
+
+    padding:20px;
+
 }
 
-.welcome-card h2 {
-    margin-bottom: 8px;
+/* ===========================
+   Welcome
+=========================== */
+
+.welcome-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--main-light),
+        var(--main)
+    );
+
+    color:white;
+
+    border-radius:28px;
+
+    padding:26px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+    0 15px 35px rgba(255,79,139,.28);
+
 }
 
-.card {
-    background: white;
-    border-radius: 22px;
-    padding: 22px;
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+.welcome-card h2{
+
+    margin-bottom:8px;
+
 }
 
-.emoji {
-    font-size: 36px;
+.welcome-card p{
+
+    opacity:.9;
+
 }
 
-.card h3 {
-    margin-bottom: 6px;
+/* ===========================
+   Card
+=========================== */
+
+.card{
+
+    background:var(--card);
+
+    border-radius:24px;
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+
+    0 8px 24px rgba(0,0,0,.06);
+
 }
 
-.card p {
-    color: #666;
+.next-live-card{
+
+    min-height:110px;
+
 }
 
-.stats {
-    display: flex;
-    gap: 16px;
+.emoji{
+
+    font-size:38px;
+
 }
 
-.stat-card {
+.card h3{
 
-    flex: 1;
+    margin-bottom:8px;
 
-    background: white;
+}
 
-    border-radius: 22px;
+.card p{
 
-    text-align: center;
+    color:var(--sub);
 
-    padding: 24px;
+    line-height:1.5;
 
-    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+/* ===========================
+   Stats
+=========================== */
+
+.stats{
+
+    display:flex;
+
+    gap:16px;
+
+}
+
+.stat-card{
+
+    flex:1;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+
+    0 8px 24px rgba(0,0,0,.06);
 
 }
 
 .label{
-    color:#777;
-    margin-bottom:10px;
+
+    color:var(--sub);
+
+    margin-bottom:12px;
+
 }
 
 .value{
 
-    font-size:42px;
+    color:var(--main);
+
+    font-size:44px;
 
     font-weight:bold;
 
-    color:#ff4f8b;
+    line-height:1;
 
 }
 
 .stat-card span{
-    color:#888;
+
+    color:var(--sub);
+
 }
 
-input{
+/* ===========================
+   Form
+=========================== */
+
+.form-card{
+
+    display:block;
+
+}
+
+.form-card h2{
+
+    margin-bottom:20px;
+
+}
+
+input,
+textarea{
 
     width:100%;
 
     padding:16px;
 
+    margin-top:14px;
+
     border-radius:16px;
 
     border:1px solid #ddd;
 
-    margin-top:14px;
-
     font-size:16px;
+
+    font-family:inherit;
+
+    background:white;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+input:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--main);
+
+    box-shadow:
+
+    0 0 0 4px rgba(255,79,139,.12);
 
 }
 
@@ -126,15 +279,15 @@ input{
 
     width:100%;
 
-    margin-top:18px;
+    margin-top:20px;
 
     padding:18px;
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    background:#ff4f8b;
+    background:var(--main);
 
     color:white;
 
@@ -142,15 +295,29 @@ input{
 
     font-weight:bold;
 
+    cursor:pointer;
+
+    transition:.2s;
+
 }
+
+.save-btn:active{
+
+    transform:scale(.98);
+
+}
+
+/* ===========================
+   Bottom Tab
+=========================== */
 
 nav{
 
     position:fixed;
 
-    bottom:0;
-
     left:0;
+
+    bottom:0;
 
     width:100%;
 
@@ -162,7 +329,9 @@ nav{
 
     padding:12px 0 calc(12px + env(safe-area-inset-bottom));
 
-    box-shadow:0 -5px 20px rgba(0,0,0,.08);
+    box-shadow:
+
+    0 -6px 20px rgba(0,0,0,.08);
 
 }
 
@@ -174,9 +343,25 @@ nav button{
 
     font-size:28px;
 
+    cursor:pointer;
+
+    transition:.2s;
+
 }
 
-#add-screen{
+nav button:active{
+
+    transform:scale(.9);
+
+}
+
+/* ===========================
+   Screen
+=========================== */
+
+#add-screen,
+#history-screen,
+#stats-screen{
 
     display:none;
 
