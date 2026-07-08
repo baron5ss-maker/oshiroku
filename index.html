@@ -1,32 +1,197 @@
-<section id="add-screen">
+<!DOCTYPE html>
+<html lang="ja">
 
-    <div class="card">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推し録</title>
 
-        <h2>ライブ登録</h2>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <input
-            id="event-name"
-            type="text"
-            placeholder="イベント名">
+<body>
 
-        <input
-            id="group-name"
-            type="text"
-            placeholder="グループ">
+<header class="app-header">
 
-        <input
-            id="member-name"
-            type="text"
-            placeholder="推しメンバー">
+    <h1>💖 推し録</h1>
 
-        <button
-            id="save-btn"
-            class="save-btn">
+    <p>あなた専用の推し活記録</p>
 
-            保存
+</header>
 
-        </button>
+<main>
 
-    </div>
+    <!-- ホーム -->
+    <section id="home-screen">
 
-</section>
+        <div class="welcome-card">
+
+            <h2>こんにちは、しゅんた 👋</h2>
+
+            <p>今日も推し活楽しもう！</p>
+
+        </div>
+
+        <div class="card next-live-card">
+
+            <div class="emoji">
+                🎤
+            </div>
+
+            <div>
+
+                <h3>次のイベント</h3>
+
+                <p id="next-live">
+
+                    まだ登録されていません
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <p class="label">
+
+                    今年の参戦
+
+                </p>
+
+                <p id="live-count" class="value">
+
+                    0
+
+                </p>
+
+                <span>回</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <p class="label">
+
+                    総チェキ
+
+                </p>
+
+                <p id="cheki-count" class="value">
+
+                    0
+
+                </p>
+
+                <span>枚</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 登録 -->
+    <section id="add-screen">
+
+        <div class="card form-card">
+
+            <h2>✨ 新しい思い出</h2>
+
+            <input
+                id="event-date"
+                type="date">
+
+            <input
+                id="group-name"
+                type="text"
+                placeholder="グループ">
+
+            <input
+                id="event-name"
+                type="text"
+                placeholder="イベント名">
+
+            <input
+                id="venue-name"
+                type="text"
+                placeholder="会場">
+
+            <input
+                id="member-name"
+                type="text"
+                placeholder="推しメンバー">
+
+            <input
+                id="cheki-count-input"
+                type="number"
+                placeholder="チェキ枚数">
+
+            <textarea
+                id="setlist"
+                placeholder="セトリ"></textarea>
+
+            <textarea
+                id="memo"
+                placeholder="感想・メモ"></textarea>
+
+            <button
+                id="save-btn"
+                class="save-btn">
+
+                💖 思い出を保存
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- 履歴（まだ未実装） -->
+    <section id="history-screen">
+
+    </section>
+
+    <!-- 集計（まだ未実装） -->
+    <section id="stats-screen">
+
+    </section>
+
+</main>
+
+<nav>
+
+    <button id="home-btn">
+
+        🏠
+
+    </button>
+
+    <button id="add-btn">
+
+        ➕
+
+    </button>
+
+    <button id="history-btn">
+
+        📖
+
+    </button>
+
+    <button id="stats-btn">
+
+        📊
+
+    </button>
+
+</nav>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
