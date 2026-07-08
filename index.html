@@ -1,97 +1,32 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>推し録</title>
+<section id="add-screen">
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <div class="card">
 
-<body>
+        <h2>ライブ登録</h2>
 
-<header class="app-header">
-    <h1>💖 推し録</h1>
-    <p>あなた専用の推し活記録</p>
-</header>
+        <input
+            id="event-name"
+            type="text"
+            placeholder="イベント名">
 
-<main>
+        <input
+            id="group-name"
+            type="text"
+            placeholder="グループ">
 
-    <section id="home-screen">
+        <input
+            id="member-name"
+            type="text"
+            placeholder="推しメンバー">
 
-        <div class="welcome-card">
-            <h2>こんにちは、しゅんた 👋</h2>
-            <p>今日も推し活楽しもう！</p>
-        </div>
+        <button
+            id="save-btn"
+            class="save-btn">
 
-        <div class="card">
-            <span class="emoji">🎤</span>
+            保存
 
-            <div>
-                <h3>次のライブ</h3>
-                <p>まだ登録されていません</p>
-            </div>
-        </div>
+        </button>
 
-        <div class="stats">
+    </div>
 
-            <div class="stat-card">
-                <p class="label">今年の参戦</p>
-                <p class="value">0</p>
-                <span>回</span>
-            </div>
-
-            <div class="stat-card">
-                <p class="label">総チェキ</p>
-                <p class="value">0</p>
-                <span>枚</span>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="add-screen">
-
-        <div class="card">
-
-            <h2>ライブ登録</h2>
-
-            <input
-                type="text"
-                placeholder="イベント名">
-
-            <input
-                type="text"
-                placeholder="グループ">
-
-            <input
-                type="text"
-                placeholder="推しメンバー">
-
-            <button class="save-btn">
-                保存
-            </button>
-
-        </div>
-
-    </section>
-
-</main>
-
-<nav>
-
-    <button id="home-btn">🏠</button>
-
-    <button id="add-btn">➕</button>
-
-    <button>📖</button>
-
-    <button>📊</button>
-
-</nav>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+</section>
