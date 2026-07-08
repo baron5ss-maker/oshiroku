@@ -1,18 +1,16 @@
-const home = document.getElementById("home-screen");
-const add = document.getElementById("add-screen");
+const homeScreen = document.getElementById("home-screen");
+const addScreen = document.getElementById("add-screen");
 
-const buttons = document.querySelectorAll("nav button");
+document.getElementById("home-btn").addEventListener("click", () => {
 
-buttons[1].addEventListener("click", () => {
-
-    home.style.display = "none";
-    add.style.display = "block";
+    homeScreen.style.display = "block";
+    addScreen.style.display = "none";
 
 });
 
-buttons[0].addEventListener("click", () => {
+document.getElementById("add-btn").addEventListener("click", () => {
 
-    add.style.display = "none";
-    home.style.display = "block";
+    homeScreen.style.display = "none";
+    addScreen.style.display = "block";
 
 });
