@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>推し録</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<main>
 
-  <header>
-    <h1>📱 推し録</h1>
-    <p>自分だけの推し活記録アプリ</p>
-  </header>
+  <!-- ホーム画面 -->
+  <section id="home-screen">
 
-  <main>
     <div class="card">
       <h2>今年の参戦</h2>
       <p class="number">0 回</p>
@@ -28,15 +17,28 @@
       <h2>次のライブ</h2>
       <p>まだ登録されていません</p>
     </div>
-  </main>
 
-  <nav>
-    <button>🏠</button>
-    <button>➕</button>
-    <button>📖</button>
-    <button>📊</button>
-  </nav>
+  </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- 登録画面 -->
+  <section id="add-screen" style="display:none;">
+
+    <div class="card">
+
+      <h2>ライブ登録</h2>
+
+      <input id="event-name" placeholder="イベント名">
+
+      <input id="group-name" placeholder="グループ">
+
+      <input id="member-name" placeholder="推しメンバー">
+
+      <button id="save-btn">
+        保存（まだ動きません）
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
