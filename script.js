@@ -1319,3 +1319,194 @@ function deleteMemoryWithoutToast(){
     }
 
 }
+// =====================================
+// History Empty State
+// =====================================
+
+function renderHistory(){
+
+    const list =
+        document.getElementById("history-list");
+
+    list.innerHTML = "";
+
+    let memories = [...getMemories()];
+
+    const keyword =
+        historySearch.value
+        .trim()
+        .toLowerCase();
+
+    if(keyword){
+
+        memories = memories.filter(memory=>{
+
+            return (
+
+                memory.title.toLowerCase().includes(keyword)
+
+                ||
+
+                memory.group.toLowerCase().includes(keyword)
+
+                ||
+
+                memory.member.toLowerCase().includes(keyword)
+
+            );
+
+        });
+
+    }
+
+    switch(historySort.value){
+
+        case "old":
+
+            memories.sort(
+
+                (a,b)=>
+
+                new Date(a.date)-new Date(b.date)
+
+            );
+
+            break;
+
+        case "cheki":
+
+            memories.sort(
+
+                (a,b)=>
+
+                b.cheki-a.cheki
+
+            );
+
+            break;
+
+        default:
+
+            memories.sort(
+
+                (a,b)=>
+
+                new Date(b.date)-new Date(a.date)
+
+            );
+
+    }
+
+    // -------------------------
+    // Empty State
+    // -------------------------
+
+    if(memories.length===0){
+
+        list.innerHTML=`
+
+            <div class="card empty-card">
+
+                <h2>
+
+                    📭
+
+                </h2>
+
+                <h3>
+
+                    思い出がありません
+
+                </h3>
+
+                <p>
+
+                    ライブを登録すると
+                    ここに表示されます😊
+
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    memories.forEach(memory=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className="history-card";
+
+        card.innerHTML=`
+
+            <h3>${memory.title}</h3>
+
+            <p>💖 ${memory.group}</p>
+
+            <p>👤 ${memory.member}</p>
+
+            <p>📅 ${formatDate(memory.date)}</p>
+
+            <div class="history-footer">
+
+                <span>
+
+                    📸 ${memory.cheki}枚
+
+                </span>
+
+                <span>
+
+                    ＞
+
+                </span>
+
+            </div>
+
+        `;
+
+        card.onclick=()=>{
+
+            openDetail(memory);
+
+        };
+
+        list.appendChild(card);
+
+    });
+
+}
+
+// =====================================
+// Refresh
+// =====================================
+
+function refreshApp(){
+
+    updateHome();
+
+    renderHistory();
+
+    renderMember();
+
+}
+
+// =====================================
+// Initial Render
+// =====================================
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        refreshApp();
+
+    }
+
+);
