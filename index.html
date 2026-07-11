@@ -326,26 +326,112 @@
         <!-- =======================
              HISTORY
         ======================== -->
+        
+<section
+    id="history-screen"
+    class="screen">
 
-        <section
-            id="history-screen"
-            class="screen">
+    <div class="page-header">
 
-            <div class="page-header">
+        <h2>📖 思い出</h2>
 
-                <h2>📖 思い出</h2>
+        <p>ライブの思い出を振り返ろう</p>
 
-                <p>今までの推し活</p>
+    </div>
 
-            </div>
+    <div class="history-toolbar">
 
-            <div
-                id="history-list"
-                class="history-list">
+        <input
+            id="history-search"
+            type="text"
+            placeholder="イベント名・グループ名で検索">
 
-            </div>
+        <select id="history-sort">
 
-        </section>
+            <option value="new">新しい順</option>
+
+            <option value="old">古い順</option>
+
+            <option value="cheki">チェキ枚数順</option>
+
+        </select>
+
+    </div>
+
+    <div id="history-list">
+
+    </div>
+
+</section>
+
+<!-- ======================
+     Detail Modal
+====================== -->
+
+<div
+    id="detail-modal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <button
+            id="close-detail"
+            class="close-btn">
+
+            ✕
+
+        </button>
+
+        <h2 id="detail-title">
+
+            イベント名
+
+        </h2>
+
+        <p id="detail-group"></p>
+
+        <p id="detail-date"></p>
+
+        <p id="detail-place"></p>
+
+        <hr>
+
+        <h3>🎤 セットリスト</h3>
+
+        <pre id="detail-setlist">
+
+        </pre>
+
+        <h3>📝 メモ</h3>
+
+        <p id="detail-memo">
+
+        </p>
+
+        <div class="detail-buttons">
+
+            <button
+                id="edit-memory"
+                class="primary-button">
+
+                ✏️ 編集
+
+            </button>
+
+            <button
+                id="delete-memory"
+                class="danger-button">
+
+                🗑 削除
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+   
         
                 <!-- =======================
              MEMBER
