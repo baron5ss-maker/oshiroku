@@ -1515,3 +1515,4 @@ function openDetail(memory){
     alert(memory.title);
 
 }
+detailModal.style.display="flex";
