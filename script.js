@@ -1102,4 +1102,220 @@ detailModal?.addEventListener(
     }
 
 );
+// =====================================
+// Delete
+// =====================================
 
+document
+
+.getElementById("delete-memory")
+
+.addEventListener(
+
+    "click",
+
+    deleteMemory
+
+);
+
+function deleteMemory(){
+
+    if(!selectedMemory){
+
+        return;
+
+    }
+
+    const ok=
+
+        confirm(
+
+            "この思い出を削除しますか？"
+
+        );
+
+    if(!ok){
+
+        return;
+
+    }
+
+    const memories=
+
+        getMemories();
+
+    const index=
+
+        memories.findIndex(
+
+            memory=>
+
+                memory.createdAt===selectedMemory.createdAt
+
+        );
+
+    if(index!==-1){
+
+        memories.splice(
+
+            index,
+
+            1
+
+        );
+
+        saveMemories(
+
+            memories
+
+        );
+
+    }
+
+    closeDetail();
+
+    updateHome();
+
+    renderHistory();
+
+    renderMember();
+
+    showToast(
+
+        "🗑 思い出を削除しました"
+
+    );
+
+}
+
+// =====================================
+// Edit
+// =====================================
+
+document
+
+.getElementById("edit-memory")
+
+.addEventListener(
+
+    "click",
+
+    editMemory
+
+);
+
+function editMemory(){
+
+    if(!selectedMemory){
+
+        return;
+
+    }
+
+    showScreen("add");
+
+    document.getElementById(
+
+        "event-date"
+
+    ).value=
+
+        selectedMemory.date;
+
+    document.getElementById(
+
+        "event-name"
+
+    ).value=
+
+        selectedMemory.title;
+
+    document.getElementById(
+
+        "group-name"
+
+    ).value=
+
+        selectedMemory.group;
+
+    document.getElementById(
+
+        "member-name"
+
+    ).value=
+
+        selectedMemory.member;
+
+    document.getElementById(
+
+        "venue-name"
+
+    ).value=
+
+        selectedMemory.place;
+
+    document.getElementById(
+
+        "cheki-count-input"
+
+    ).value=
+
+        selectedMemory.cheki;
+
+    document.getElementById(
+
+        "setlist"
+
+    ).value=
+
+        selectedMemory.setlist;
+
+    document.getElementById(
+
+        "memo"
+
+    ).value=
+
+        selectedMemory.memo;
+
+    deleteMemoryWithoutToast();
+
+    closeDetail();
+
+}
+
+function deleteMemoryWithoutToast(){
+
+    const memories=
+
+        getMemories();
+
+    const index=
+
+        memories.findIndex(
+
+            memory=>
+
+                memory.createdAt===selectedMemory.createdAt
+
+        );
+
+    if(index!==-1){
+
+        memories.splice(
+
+            index,
+
+            1
+
+        );
+
+        saveMemories(
+
+            memories
+
+        );
+
+    }
+
+}
