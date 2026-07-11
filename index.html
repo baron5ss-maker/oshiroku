@@ -1,197 +1,201 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <title>推し録</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<header class="app-header">
+<header class="header">
 
-    <h1>💖 推し録</h1>
+    <div>
 
-    <p>あなた専用の推し活記録</p>
+        <h1>💖 推し録</h1>
+
+        <p>思い出は、積み重ねるもの。</p>
+
+    </div>
+
+    <img
+        class="profile"
+        src="https://placehold.co/80x80/png"
+        alt="profile">
 
 </header>
 
-<main>
 
-    <!-- ホーム -->
-    <section id="home-screen">
+<main id="home-screen">
 
-        <div class="welcome-card">
+    <section class="hero">
 
-            <h2>こんにちは、しゅんた 👋</h2>
+        <p class="small">
 
-            <p>今日も推し活楽しもう！</p>
+            次のイベントまで
+
+        </p>
+
+        <h2 id="countdown">
+
+            あと11日
+
+        </h2>
+
+    </section>
+
+
+
+    <section class="event-card">
+
+        <div>
+
+            <p class="label">
+
+                NEXT EVENT
+
+            </p>
+
+            <h2 id="event-name">
+
+                夏染
+
+            </h2>
+
+            <p id="group-name">
+
+                MAGICAL SPEC
+
+            </p>
+
+            <p id="event-date">
+
+                2026.07.20
+
+            </p>
+
+            <p id="event-place">
+
+                幕張公園
+
+            </p>
 
         </div>
 
-        <div class="card next-live-card">
+        <button>
 
-            <div class="emoji">
-                🎤
-            </div>
+            📅
 
-            <div>
+        </button>
 
-                <h3>次のイベント</h3>
+    </section>
 
-                <p id="next-live">
 
-                    まだ登録されていません
 
-                </p>
+    <section class="stats">
 
-            </div>
+        <div class="stat">
+
+            <p>
+
+                今年の参戦
+
+            </p>
+
+            <h2 id="live-count">
+
+                18
+
+            </h2>
 
         </div>
 
-        <div class="stats">
+        <div class="stat">
 
-            <div class="stat-card">
+            <p>
 
-                <p class="label">
+                チェキ
 
-                    今年の参戦
+            </p>
 
-                </p>
+            <h2 id="cheki-count">
 
-                <p id="live-count" class="value">
+                152
 
-                    0
-
-                </p>
-
-                <span>回</span>
-
-            </div>
-
-            <div class="stat-card">
-
-                <p class="label">
-
-                    総チェキ
-
-                </p>
-
-                <p id="cheki-count" class="value">
-
-                    0
-
-                </p>
-
-                <span>枚</span>
-
-            </div>
+            </h2>
 
         </div>
 
     </section>
 
-    <!-- 登録 -->
-    <section id="add-screen">
 
-        <div class="card form-card">
 
-            <h2>✨ 新しい思い出</h2>
+    <section class="today">
 
-            <input
-                id="event-date"
-                type="date">
+        <h3>
 
-            <input
-                id="group-name"
-                type="text"
-                placeholder="グループ">
+            🌸 去年の今日
 
-            <input
-                id="event-name"
-                type="text"
-                placeholder="イベント名">
+        </h3>
 
-            <input
-                id="venue-name"
-                type="text"
-                placeholder="会場">
+        <div class="memory-card">
 
-            <input
-                id="member-name"
-                type="text"
-                placeholder="推しメンバー">
+            <h4>
 
-            <input
-                id="cheki-count-input"
-                type="number"
-                placeholder="チェキ枚数">
+                浴衣公演
 
-            <textarea
-                id="setlist"
-                placeholder="セトリ"></textarea>
+            </h4>
 
-            <textarea
-                id="memo"
-                placeholder="感想・メモ"></textarea>
+            <p>
 
-            <button
-                id="save-btn"
-                class="save-btn">
+                AIKAと夏祭りトーク😊
 
-                💖 思い出を保存
-
-            </button>
+            </p>
 
         </div>
 
     </section>
 
-    <!-- 履歴（まだ未実装） -->
-    <section id="history-screen">
 
-    </section>
 
-    <!-- 集計（まだ未実装） -->
-    <section id="stats-screen">
+    <section>
+
+        <h3>
+
+            📖 最近の思い出
+
+        </h3>
+
+        <div id="recent-list">
+
+        </div>
 
     </section>
 
 </main>
 
+
+
 <nav>
 
-    <button id="home-btn">
+    <button>🏠</button>
 
-        🏠
+    <button>📅</button>
 
-    </button>
+    <button class="main-button">＋</button>
 
-    <button id="add-btn">
+    <button>📖</button>
 
-        ➕
-
-    </button>
-
-    <button id="history-btn">
-
-        📖
-
-    </button>
-
-    <button id="stats-btn">
-
-        📊
-
-    </button>
+    <button>👤</button>
 
 </nav>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
