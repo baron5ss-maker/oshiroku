@@ -1469,9 +1469,9 @@ function renderHistory(){
 
         `;
 
-        card.onclick=()=>{
-
-            openDetail(memory);
+        card.addEventListener("click", () => {
+    openDetail(memory);
+});
 
         };
 
