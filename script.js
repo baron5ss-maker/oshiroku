@@ -794,3 +794,199 @@ document.addEventListener(
     }
 
 );
+
+// =====================================
+// History List
+// =====================================
+
+const historySearch =
+    document.getElementById("history-search");
+
+const historySort =
+    document.getElementById("history-sort");
+
+historySearch?.addEventListener(
+
+    "input",
+
+    renderHistory
+
+);
+
+historySort?.addEventListener(
+
+    "change",
+
+    renderHistory
+
+);
+
+function renderHistory(){
+
+    const list =
+        document.getElementById("history-list");
+
+    list.innerHTML = "";
+
+    let memories = [...getMemories()];
+
+    // -----------------------
+    // 検索
+    // -----------------------
+
+    const keyword =
+        historySearch.value
+        .trim()
+        .toLowerCase();
+
+    if(keyword){
+
+        memories =
+            memories.filter(memory=>{
+
+                return (
+
+                    memory.title
+                    .toLowerCase()
+                    .includes(keyword)
+
+                    ||
+
+                    memory.group
+                    .toLowerCase()
+                    .includes(keyword)
+
+                    ||
+
+                    memory.member
+                    .toLowerCase()
+                    .includes(keyword)
+
+                );
+
+            });
+
+    }
+
+    // -----------------------
+    // 並び替え
+    // -----------------------
+
+    switch(historySort.value){
+
+        case "old":
+
+            memories.sort(
+
+                (a,b)=>
+
+                new Date(a.date)
+                -
+                new Date(b.date)
+
+            );
+
+            break;
+
+        case "cheki":
+
+            memories.sort(
+
+                (a,b)=>
+
+                b.cheki-a.cheki
+
+            );
+
+            break;
+
+        default:
+
+            memories.sort(
+
+                (a,b)=>
+
+                new Date(b.date)
+                -
+                new Date(a.date)
+
+            );
+
+    }
+
+    // -----------------------
+    // 描画
+    // -----------------------
+
+    memories.forEach((memory,index)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "history-card";
+
+        card.dataset.index =
+            index;
+
+        card.innerHTML = `
+
+            <h3>
+
+                ${memory.title}
+
+            </h3>
+
+            <p>
+
+                💖 ${memory.group}
+
+            </p>
+
+            <p>
+
+                👤 ${memory.member}
+
+            </p>
+
+            <p>
+
+                📅 ${formatDate(memory.date)}
+
+            </p>
+
+            <div class="history-footer">
+
+                <span>
+
+                    📸 ${memory.cheki}枚
+
+                </span>
+
+                <span>
+
+                    ＞
+
+                </span>
+
+            </div>
+
+        `;
+
+        card.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                openDetail(memory);
+
+            }
+
+        );
+
+        list.appendChild(card);
+
+    });
+
+}
