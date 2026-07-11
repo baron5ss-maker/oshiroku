@@ -1510,3 +1510,8 @@ document.addEventListener(
     }
 
 );
+function openDetail(memory){
+
+    alert(memory.title);
+
+}
