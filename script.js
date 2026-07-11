@@ -990,3 +990,116 @@ function renderHistory(){
     });
 
 }
+// =====================================
+// Detail Modal
+// =====================================
+
+let selectedMemory = null;
+
+const detailModal =
+    document.getElementById("detail-modal");
+
+document
+    .getElementById("close-detail")
+    ?.addEventListener(
+
+        "click",
+
+        closeDetail
+
+    );
+
+function openDetail(memory){
+
+    selectedMemory = memory;
+
+    document.getElementById(
+
+        "detail-title"
+
+    ).textContent =
+
+        memory.title;
+
+    document.getElementById(
+
+        "detail-group"
+
+    ).textContent =
+
+        "💖 " + memory.group;
+
+    document.getElementById(
+
+        "detail-date"
+
+    ).textContent =
+
+        "📅 " + formatDate(memory.date);
+
+    document.getElementById(
+
+        "detail-place"
+
+    ).textContent =
+
+        "📍 " + memory.place;
+
+    document.getElementById(
+
+        "detail-setlist"
+
+    ).textContent =
+
+        memory.setlist ||
+
+        "未登録";
+
+    document.getElementById(
+
+        "detail-memo"
+
+    ).textContent =
+
+        memory.memo ||
+
+        "メモはありません";
+
+    detailModal.classList.remove(
+
+        "hidden"
+
+    );
+
+}
+
+function closeDetail(){
+
+    detailModal.classList.add(
+
+        "hidden"
+
+    );
+
+}
+
+detailModal?.addEventListener(
+
+    "click",
+
+    e=>{
+
+        if(
+
+            e.target === detailModal
+
+        ){
+
+            closeDetail();
+
+        }
+
+    }
+
+);
+
