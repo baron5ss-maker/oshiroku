@@ -1363,3 +1363,32 @@ button:active{
     }
 
 }
+.empty-card{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+}
+
+.empty-card h2{
+
+    font-size:48px;
+
+    margin-bottom:16px;
+
+}
+
+.empty-card h3{
+
+    margin-bottom:10px;
+
+}
+
+.empty-card p{
+
+    color:var(--sub);
+
+    line-height:1.7;
+
+}
