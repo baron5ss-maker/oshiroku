@@ -1,182 +1,169 @@
-// ==========================
-// 推し録 v1.0
-// ==========================
+// ============================
+// 推し録 v0.8
+// Home
+// ============================
 
-const screens = {
-    home: document.getElementById("home-screen"),
-    add: document.getElementById("add-screen"),
-    history: document.getElementById("history-screen"),
-    stats: document.getElementById("stats-screen")
-};
+const STORAGE_KEY = "oshiroku_memories";
 
-// タブ
-document.getElementById("home-btn").addEventListener("click", () => showScreen("home"));
-document.getElementById("add-btn").addEventListener("click", () => showScreen("add"));
+const sampleData = [
+    {
+        title: "夏染",
+        group: "MAGICAL SPEC",
+        date: "2026-07-20",
+        place: "幕張公園",
+        cheki: 4,
+        memo: "AIKAと夏祭りトーク😊"
+    },
+    {
+        title: "定期公演",
+        group: "MAGICAL SPEC",
+        date: "2026-06-30",
+        place: "Zepp Haneda",
+        cheki: 2,
+        memo: "最前列！"
+    }
+];
 
-function showScreen(screen) {
+init();
 
-    Object.values(screens).forEach(s => s.style.display = "none");
+function init(){
 
-    screens[screen].style.display = "block";
-
-}
-
-// 初期表示
-showScreen("home");
-
-// ==========================
-// 保存
-// ==========================
-
-document
-.getElementById("save-btn")
-.addEventListener("click", saveLive);
-
-function saveLive(){
-
-    const live={
-
-        date:getValue("event-date"),
-
-        group:getValue("group-name"),
-
-        event:getValue("event-name"),
-
-        venue:getValue("venue-name"),
-
-        member:getValue("member-name"),
-
-        cheki:Number(
-            getValue("cheki-count-input") || 0
-        ),
-
-        setlist:getValue("setlist"),
-
-        memo:getValue("memo"),
-
-        createdAt:Date.now()
-
-    };
-
-    if(
-        !live.group ||
-        !live.event
-    ){
-
-        alert("グループとイベント名は入力してね😊");
-        return;
-
+    if(!localStorage.getItem(STORAGE_KEY)){
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(sampleData)
+        );
     }
 
-    const lives=loadLives();
-
-    lives.push(live);
-
-    saveLives(lives);
-
-    clearForm();
-
-    updateHome();
-
-    showScreen("home");
-
-    alert("💖 思い出を追加しました！");
+    loadHome();
 
 }
 
-// ==========================
-// Home更新
-// ==========================
+function loadHome(){
 
-function updateHome(){
+    const memories = getMemories();
 
-    const lives=loadLives();
+    updateStats(memories);
 
-    document.getElementById("live-count").textContent=lives.length;
+    updateNextEvent(memories);
 
-    const totalCheki=lives.reduce(
-        (sum,live)=>sum+live.cheki,
-        0
-    );
-
-    document.getElementById("cheki-count").textContent=totalCheki;
-
-    const next=document.getElementById("next-live");
-
-    if(lives.length===0){
-
-        next.textContent="まだ登録されていません";
-
-        return;
-
-    }
-
-    const latest=lives[lives.length-1];
-
-    next.innerHTML=`
-
-        <strong>${latest.group}</strong><br>
-
-        ${latest.event}<br>
-
-        📍 ${latest.venue || "-"}
-
-    `;
+    updateRecent(memories);
 
 }
 
-// ==========================
-// LocalStorage
-// ==========================
-
-function loadLives(){
+function getMemories(){
 
     return JSON.parse(
-        localStorage.getItem("lives") || "[]"
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
+}
+
+function updateStats(memories){
+
+    document.getElementById("live-count").textContent =
+        memories.length;
+
+    const totalCheki =
+        memories.reduce(
+            (sum,m)=>sum + Number(m.cheki),
+            0
+        );
+
+    document.getElementById("cheki-count").textContent =
+        totalCheki;
+
+}
+
+function updateNextEvent(memories){
+
+    if(memories.length===0) return;
+
+    const next = memories[0];
+
+    document.getElementById("event-name").textContent =
+        next.title;
+
+    document.getElementById("group-name").textContent =
+        next.group;
+
+    document.getElementById("event-date").textContent =
+        formatDate(next.date);
+
+    document.getElementById("event-place").textContent =
+        next.place;
+
+    updateCountdown(next.date);
+
+}
+
+function updateCountdown(date){
+
+    const today = new Date();
+
+    const target = new Date(date);
+
+    const diff =
+        Math.ceil(
+            (target - today)
+            /
+            (1000*60*60*24)
+        );
+
+    document.getElementById("countdown").textContent =
+        "あと " + diff + " 日";
+
+}
+
+function updateRecent(memories){
+
+    const area =
+        document.getElementById("recent-list");
+
+    area.innerHTML = "";
+
+    memories
+        .slice(0,5)
+        .forEach(memory=>{
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "recent-card";
+
+            card.innerHTML = `
+                <div class="recent-photo"></div>
+
+                <div>
+
+                    <h4>${memory.title}</h4>
+
+                    <p>${memory.group}</p>
+
+                    <small>${formatDate(memory.date)}</small>
+
+                </div>
+            `;
+
+            area.appendChild(card);
+
+        });
+
+}
+
+function formatDate(date){
+
+    const d =
+        new Date(date);
+
+    return d.toLocaleDateString(
+        "ja-JP",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+        }
     );
 
 }
-
-function saveLives(data){
-
-    localStorage.setItem(
-        "lives",
-        JSON.stringify(data)
-    );
-
-}
-
-// ==========================
-// Utility
-// ==========================
-
-function getValue(id){
-
-    return document
-        .getElementById(id)
-        .value
-        .trim();
-
-}
-
-function clearForm(){
-
-    [
-        "event-date",
-        "group-name",
-        "event-name",
-        "venue-name",
-        "member-name",
-        "cheki-count-input",
-        "setlist",
-        "memo"
-    ].forEach(id=>{
-
-        document.getElementById(id).value="";
-
-    });
-
-}
-
-// 初回表示
-updateHome();
